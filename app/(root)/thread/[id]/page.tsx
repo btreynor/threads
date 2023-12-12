@@ -1,11 +1,11 @@
-import ThreadCard from "@/components/cards/ThreadCard";
-import Comment from "@/components/forms/Comment";
-import { fetchThreadById } from "@/lib/actions/thread.actions";
-
-import { fetchUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 
-import { redirect } from "next/navigation";
+import Comment from "@/components/forms/Comment";
+import ThreadCard from "@/components/cards/ThreadCard";
+
+import { fetchUser } from "@/lib/actions/user.actions";
+import { fetchThreadById } from "@/lib/actions/thread.actions";
 
 export const revalidate = 0;
 
@@ -16,7 +16,7 @@ async function page({ params }: {params: { id: string }}) {
     if(!user) return null;
 
     const userInfo = await fetchUser(user.id);
-    if(!userInfo.onboarded) redirect('/onboarding')
+    if(!userInfo?.onboarded) redirect('/onboarding')
 
     const thread = await fetchThreadById(params.id);
 
@@ -24,9 +24,8 @@ async function page({ params }: {params: { id: string }}) {
         <section className="relative">
             <div>
                 <ThreadCard
-                    key={thread._id}
                     id={thread._id}
-                    currentUserId={user?.id || ""}
+                    currentUserId={user.id}
                     parentId={thread.parentId}
                     content={thread.text}
                     author={thread.author}
@@ -44,14 +43,14 @@ async function page({ params }: {params: { id: string }}) {
                 />
             </div>
 
-            <div className="mt-10">
+            <div className='mt-10'>
                 {thread.children.map((childItem: any) => (
                     <ThreadCard
                         key={childItem._id}
                         id={childItem._id}
                         currentUserId={user.id}
                         parentId={childItem.parentId}
-                        content={childItem.content}
+                        content={childItem.text}
                         author={childItem.author}
                         community={childItem.community}
                         createdAt={childItem.createdAt}
@@ -61,7 +60,7 @@ async function page({ params }: {params: { id: string }}) {
                 ))}
             </div>
         </section>
-    );
+  );
 }
 
 export default page;
