@@ -18,8 +18,7 @@ function DeleteThread({
     currentUserId,
     authorId,
     parentId,
-    isComment,
-    
+    isComment,    
 }: Props) {
     const pathname = usePathname();
     const router = useRouter();

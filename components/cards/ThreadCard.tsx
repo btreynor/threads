@@ -3,9 +3,6 @@ import Image from "next/image";
 
 import { formatDateString } from "@/lib/utils";
 import DeleteThread from "../forms/DeleteThread";
-import repost from '@/public/assets/repost.svg';
-import reply from '@/public/assets/reply.svg';
-import share from '@/public/assets/share.svg';
 
 interface Props {
     id: string;
@@ -51,7 +48,7 @@ function ThreadCard({
             <div className="flex items-start justify-between">
                 <div className="flex w-full flex-1 flex-row gap-4">
                     <div className="flex flex-col items-center">
-                        <Link href={`/profile/${author.id}`} className="relative h-11 w-11">+
+                        <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
                             <Image
                                 src={author.image}
                                 alt="Profile image"
@@ -83,7 +80,7 @@ function ThreadCard({
                                 />
                                 <Link href={`/thread/${id}`}>
                                 <Image
-                                    src={reply}
+                                    src='/assets/reply.svg'
                                     alt="heart"
                                     width={24}
                                     height={24}
@@ -91,14 +88,14 @@ function ThreadCard({
                                 />
                                 </Link>
                                 <Image
-                                    src={repost}
+                                    src='/assets/repost.svg'
                                     alt="heart"
                                     width={24}
                                     height={24}
                                     className="cursor-pointer object-contain"
                                 />
                                 <Image
-                                    src={share}
+                                    src='/assets/share.svg'
                                     alt="heart"
                                     width={24}
                                     height={24}

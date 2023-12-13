@@ -31,14 +31,13 @@ function Topbar() {
                     appearance={{
                         baseTheme: dark,
                         elements: {
-                            organizationSwitcherTrigger:
-                            "py-2 px-4"
-                        }
+                            organizationSwitcherTrigger: "py-2 px-4",
+                        },
                     }}
                 />
             </div>
         </nav>
-    )
+    );
 }
 
 export default Topbar;
